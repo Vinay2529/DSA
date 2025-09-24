@@ -10,10 +10,6 @@
  */
 class Solution {
     public void reorderList(ListNode head) { 
-        if(head==null || head.next==null)
-        {
-            return ;
-        }
         ListNode s=head,f=head;
 
         while(f!=null && f.next!=null)
