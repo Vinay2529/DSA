@@ -10,32 +10,47 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode fp=list1;
-        ListNode sp=list2;
-        ListNode list =new ListNode();
-        ListNode curr=list;
-
-        while(fp!=null && sp!=null)
+        ListNode headA=list1,headB=list2;
+        ListNode head=null,tail=null;
+        while(headA!=null || headB!=null)
         {
-            if(fp.val<sp.val)
+            ListNode nottocopy=null;
+            if(headA!=null && headB!=null)
             {
-                curr.next=fp;
-                fp=fp.next;
-                curr=curr.next;
+                if(headA.val<headB.val)
+                {
+                    nottocopy=headA;
+                    headA=headA.next;
+                }
+                else{
+                    nottocopy=headB;
+                    headB=headB.next;
+                }
             }
-            else{
-                curr.next=sp;
-                sp=sp.next;
-                curr=curr.next;
+            else if(headA!=null)
+            {
+                nottocopy=headA;
+                headA=headA.next;
+            }
+            else if(headB!=null){
+                nottocopy=headB;
+                headB=headB.next;
+            }
+            tail=insert(tail,nottocopy.val);
+            if(head==null)
+            {
+                head=tail;
             }
         }
-        if(fp==null)
+        return head;
+    }
+    private ListNode insert(ListNode tail,int data)
+    {
+        ListNode nn=new ListNode(data,null);
+        if(tail!=null)
         {
-            curr.next=sp;
+            tail.next=nn;
         }
-        else{
-            curr.next=fp;
-        }
-        return list.next;
+        return nn;
     }
 }
