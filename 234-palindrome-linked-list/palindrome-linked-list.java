@@ -10,32 +10,68 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ListNode prev=null;
-        ListNode slow=head,fast=head;
-        while(fast!=null && fast.next!=null)
+        if(head==null || head.next==null)
         {
-            slow=slow.next;
-            fast=fast.next.next;
+            return true;
         }
-        ListNode curr=slow;
-        while(curr!=null)
+        int n=findlen(head);
+        int reversepoint=n/2;
+
+        if(n%2!=0)
         {
-            ListNode newnode=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=newnode;
+            reversepoint=(n/2)+1;
         }
-        ListNode firsthalf=head;
-        ListNode secondhalf=prev;
-        while(secondhalf!=null)
+
+        ListNode prev=findkthNode(head,reversepoint-1);
+        ListNode reversepointNode=findkthNode(head,reversepoint);
+
+        ListNode head2=reverse(prev,reversepointNode);
+        ListNode first=head,second=head2;
+
+        while(first!=null && second!=null)
         {
-            if(firsthalf.val!=secondhalf.val)
+            if(first.val != second.val)
             {
                 return false;
             }
-            firsthalf=firsthalf.next;
-            secondhalf=secondhalf.next;
+            first=first.next;
+            second=second.next;
         }
         return true;
+    }
+    private int findlen(ListNode curr)
+    {
+        int len=0;
+        while(curr!=null)
+        {
+            len++;
+            curr=curr.next;
+        }
+        return len;
+    }
+    private ListNode findkthNode(ListNode head,int k)
+    {
+        ListNode curr=head;
+        for(int cnt=0;cnt<k;cnt++)
+        {
+            curr=curr.next;
+        }
+        return curr;
+    }
+    private ListNode reverse(ListNode prev,ListNode reversepointNode)
+    {
+        ListNode first=reversepointNode;
+        ListNode second=reversepointNode.next;
+        while(first!=null && second !=null)
+        {
+            ListNode temp=second.next;
+            second.next=first;
+            first=second;
+            second=temp;
+        }
+        prev.next.next=null;
+        prev.next=first;
+
+        return first;
     }
 }
