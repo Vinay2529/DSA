@@ -14,23 +14,20 @@ class Solution {
         {
             return true;
         }
-        int n=findlen(head);
-        int reversepoint=n/2;
-
-        if(n%2!=0)
+        ListNode slow=head,fast=head;
+        while(fast.next!=null && fast.next.next!=null)
         {
-            reversepoint=(n/2)+1;
+            slow=slow.next;
+            fast=fast.next.next;
         }
+        ListNode second=reverse(slow.next);
+        slow.next=null;
 
-        ListNode prev=findkthNode(head,reversepoint-1);
-        ListNode reversepointNode=findkthNode(head,reversepoint);
-
-        ListNode head2=reverse(prev,reversepointNode);
-        ListNode first=head,second=head2;
+        ListNode first=head;
 
         while(first!=null && second!=null)
         {
-            if(first.val != second.val)
+            if(first.val!=second.val)
             {
                 return false;
             }
@@ -39,39 +36,16 @@ class Solution {
         }
         return true;
     }
-    private int findlen(ListNode curr)
+    private ListNode reverse(ListNode head)
     {
-        int len=0;
-        while(curr!=null)
+        ListNode prev=null;
+        while(head!=null)
         {
-            len++;
-            curr=curr.next;
+            ListNode next=head.next;
+            head.next=prev;
+            prev=head;
+            head=next;
         }
-        return len;
-    }
-    private ListNode findkthNode(ListNode head,int k)
-    {
-        ListNode curr=head;
-        for(int cnt=0;cnt<k;cnt++)
-        {
-            curr=curr.next;
-        }
-        return curr;
-    }
-    private ListNode reverse(ListNode prev,ListNode reversepointNode)
-    {
-        ListNode first=reversepointNode;
-        ListNode second=reversepointNode.next;
-        while(first!=null && second !=null)
-        {
-            ListNode temp=second.next;
-            second.next=first;
-            first=second;
-            second=temp;
-        }
-        prev.next.next=null;
-        prev.next=first;
-
-        return first;
+        return prev;
     }
 }
