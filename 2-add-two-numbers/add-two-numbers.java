@@ -28,11 +28,11 @@ class Solution {
                 l2=l2.next;
             }
             carry=sum/10;
-            tail.next=new ListNode(sum%10);
+            tail.next=new ListNode(sum%10,null);
             tail=tail.next;
         }
         if(carry>0){
-            tail.next=new ListNode(carry);
+            tail.next=new ListNode(carry,null);
         }
         return newlist.next;
         
