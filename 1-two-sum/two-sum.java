@@ -5,16 +5,15 @@ class Solution {
         {
             mp.put(nums[j],j);
         }
-        int[] arr=new int[2];
+        
         for(int j=0;j<nums.length;j++)
         {
             int z=target-nums[j];
             if(mp.containsKey(z) && mp.get(z) != j)
             {
-                arr[0]=j;
-                arr[1]=mp.get(z);
+                return new int[]{j,mp.get(z)};
             }
         }
-        return arr;
+        return new int[0];
     }
 }
