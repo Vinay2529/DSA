@@ -3,23 +3,23 @@ class Solution {
         Arrays.sort(nums);
         Set<List<Integer>> st=new HashSet<>();
 
-        for(int i=0;i<nums.length-2;i++)
+        for(int i=0;i<nums.length;i++)
         {
             int target=-nums[i];
-            int f=i+1;
+            int s=i+1;
             int l=nums.length-1;
-            while(f<l)
+            while(s<l)
             {
-                int sum=nums[f]+nums[l];
+                int sum=nums[s]+nums[l];
                 if(sum==target)
                 {
-                    st.add(Arrays.asList(nums[i],nums[f],nums[l]));
-                    f++;
+                    st.add(Arrays.asList(nums[i],nums[s],nums[l]));
+                    s++;
                     l--;
                 }
                 else if(sum<target)
                 {
-                    f++;
+                    s++;
                 }
                 else{
                     l--;
