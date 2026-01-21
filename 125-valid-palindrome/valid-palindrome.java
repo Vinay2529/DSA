@@ -10,12 +10,9 @@ class Solution {
         for (char c : li) {
             sb.append(c);
         }
-        String result = sb.toString();
-        int n = result.length();
-        int l=0,r=n-1;
-        while(l<r)
-        {
-            if(result.charAt(l)!=result.charAt(r)){
+        int l = 0, r = li.size() - 1;
+        while (l < r) {
+            if (!li.get(l).equals(li.get(r))) {
                 return false;
             }
             l++;
