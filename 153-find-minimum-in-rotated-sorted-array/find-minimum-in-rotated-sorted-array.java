@@ -8,21 +8,9 @@ class Solution {
                 break;
             }
         }
-        if (count > 0) {
-            reverse(nums, 0, count-1);
-            reverse(nums, count , n - 1);
-            reverse(nums, 0, n - 1);
+        if(count>0){
+            return nums[count];
         }
         return nums[0];
-    }
-
-    private void reverse(int[] nums, int start, int end) {
-        while (start < end) {
-            int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
-            start++;
-            end--;
-        }
     }
 }
