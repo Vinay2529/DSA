@@ -11,7 +11,7 @@ class Solution {
         return this.subsets;
     }
     private void backtrack(int i,List<Integer> subset){
-        if(i>=nums.length){
+        if(i==nums.length){
             List<Integer> ans=new ArrayList<>();
             for(int num:subset)
             {
