@@ -12,12 +12,13 @@ class Solution {
     }
     private void backtrack(int i,List<Integer> subset){
         if(i==nums.length){
-            List<Integer> ans=new ArrayList<>();
-            for(int num:subset)
-            {
-                ans.add(num);
-            }
-            subsets.add(ans);
+            // List<Integer> ans=new ArrayList<>();
+            // for(int num:subset)
+            // {
+            //     ans.add(num);
+            // }
+            // subsets.add(ans);
+            subsets.add(new ArrayList<>(subset));
         }
         else{
             backtrack(i+1,subset);
