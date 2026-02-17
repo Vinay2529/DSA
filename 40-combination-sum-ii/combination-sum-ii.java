@@ -11,6 +11,7 @@ class Solution {
 
         if (rem == 0) {
             answer.add(new ArrayList<>(combination));
+            return;
         }
 
         else {
