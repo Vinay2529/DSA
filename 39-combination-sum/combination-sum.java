@@ -14,18 +14,18 @@ class Solution {
             if(rem==0)
             {
                 answer.add(new ArrayList<>(combination));
+                return;
             }
         }
         else{
             int maxtimes=rem/candidates[i];
             for(int k=0;k<=maxtimes;k++)
             {
-                int newTarget=rem-k*candidates[i];
                 for(int j=0;j<k;j++)
                 {
                     combination.add(candidates[i]);
                 }
-                backtrack(i+1,newTarget,combination);
+                backtrack(i+1,rem-k*candidates[i],combination);
                 for(int j=0;j<k;j++)
                 {
                     combination.remove(combination.size()-1);
