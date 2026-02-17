@@ -1,20 +1,19 @@
 class Solution {
     public List<List<Integer>> answer=new ArrayList<>();
+    public int[] candidates;
     public List<List<Integer>> combinationSum(int[] candidates, int target) 
     {
-        func(0,target,new ArrayList<>(),candidates);
+        this.candidates=candidates;
+        backtrack(0,target,new ArrayList<>());
         return answer;
     }
-    private void func(int i,int rem,List<Integer> combination,int[] candidates)
+    private void backtrack(int i,int rem,List<Integer> combination)
     {
         if(i==candidates.length)
         {
-            if(rem==0){
-                List<Integer> ans=new ArrayList<>();
-                for(int num:combination){
-                    ans.add(num);
-                }
-                answer.add(ans);
+            if(rem==0)
+            {
+                answer.add(new ArrayList<>(combination));
             }
         }
         else{
@@ -26,7 +25,7 @@ class Solution {
                 {
                     combination.add(candidates[i]);
                 }
-                func(i+1,newTarget,combination,candidates);
+                backtrack(i+1,newTarget,combination);
                 for(int j=0;j<k;j++)
                 {
                     combination.remove(combination.size()-1);
