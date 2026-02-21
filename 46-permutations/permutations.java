@@ -1,29 +1,30 @@
 class Solution {
     public List<List<Integer>> answer;
     public int[] nums;
+
     public List<List<Integer>> permute(int[] nums) {
-        answer=new ArrayList<>();
-        this.nums=nums;
-        function(new ArrayList<>(),new HashMap<>(),0);   
-        return answer;   
+        answer = new ArrayList<>();
+        this.nums = nums;
+        boolean[] used = new boolean[nums.length];
+        function(new ArrayList<>(), used);
+        return answer;
     }
-    private void function(List<Integer> subset,Map<Integer,Boolean> used,int i)
-    {
-        if(i==nums.length)
-        {
+
+    private void function(List<Integer> subset, boolean[] used) {
+        if (subset.size() == nums.length) {
             answer.add(new ArrayList<>(subset));
+            return;
         }
-        else{
-            for(int num:nums)
-            {
-                if(!used.containsKey(num) || used.get(num)==false)
-                {
-                    subset.add(num);
-                    used.put(num,true);
-                    function(subset,used,i+1);
-                    subset.remove(subset.size()-1);
-                    used.put(num,false);
-                }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!used[i]) {
+                subset.add(nums[i]);
+                used[i] = true;
+
+                function(subset, used);
+
+                subset.remove(subset.size() - 1);
+                used[i] = false;
             }
         }
     }
