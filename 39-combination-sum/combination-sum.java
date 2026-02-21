@@ -4,31 +4,32 @@ class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) 
     {
         this.candidates=candidates;
-        backtrack(0,target,new ArrayList<>());
+        function(new ArrayList<>(),target,0);
         return answer;
     }
-    private void backtrack(int i,int rem,List<Integer> combination)
+    private void function(List<Integer> subset,int rem,int i)
     {
         if(i==candidates.length)
         {
             if(rem==0)
             {
-                answer.add(new ArrayList<>(combination));
+                answer.add(new ArrayList<>(subset));
                 return;
             }
         }
         else{
-            int maxtimes=rem/candidates[i];
-            for(int k=0;k<=maxtimes;k++)
+            int max=rem/candidates[i];
+            for(int k=0;k<=max;k++)
             {
+                int newTarget=rem-k*candidates[i];
                 for(int j=0;j<k;j++)
                 {
-                    combination.add(candidates[i]);
+                    subset.add(candidates[i]);
                 }
-                backtrack(i+1,rem-k*candidates[i],combination);
+                function(subset,newTarget,i+1);
                 for(int j=0;j<k;j++)
                 {
-                    combination.remove(combination.size()-1);
+                    subset.remove(subset.size()-1);
                 }
             }
         }
