@@ -1,23 +1,23 @@
 class Solution {
-    public List<List<Integer>> answer = new ArrayList<>();
+    public Set<List<Integer>> answer = new HashSet<>();
     public int[] nums;
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         Arrays.sort(nums);
         this.nums = nums;
         backtrack(new ArrayList<>(), 0);
-        return answer;
+        return new ArrayList<>(answer);
     }
 
-    private void backtrack(List<Integer> subset, int start) {
-        answer.add(new ArrayList<>(subset));
-        for (int i = start; i < nums.length; i++) {
-            if (i > start && nums[i] == nums[i - 1]) {
-                continue;
-            }
+    private void backtrack(List<Integer> subset, int i) {
+        if(i==nums.length){
+            answer.add(new ArrayList<>(subset));
+        }
+        else{
+            backtrack(subset,i+1);
             subset.add(nums[i]);
-            backtrack(subset, i + 1);
-            subset.remove(subset.size() - 1);
+            backtrack(subset,i+1);
+            subset.remove(subset.size()-1);
         }
     }
 }
