@@ -2,13 +2,12 @@ class Solution {
     public List<List<Integer>> answer;
     public int[] nums;
     public List<List<Integer>> subsets(int[] nums) {
-        answer=new ArrayList<>();
         this.nums=nums;
+        answer=new ArrayList<>();
         function(new ArrayList<>(),0);
         return answer;
     }
-    private void function(List<Integer> subset,int i)
-    {
+    private void function(List<Integer> subset,int i){
         if(i==nums.length)
         {
             answer.add(new ArrayList<>(subset));
