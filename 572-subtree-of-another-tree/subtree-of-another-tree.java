@@ -17,7 +17,7 @@ class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         if(root==null)
         {
-            return false; 
+            return false;
         }
         else if(isSameTree(root,subRoot))
         {
@@ -29,14 +29,16 @@ class Solution {
     }
     private boolean isSameTree(TreeNode r1,TreeNode r2)
     {
-        if(r1==null && r2==null){
+        if(r1==null && r2==null)
+        {
             return true;
         }
-        else if(r1!=null && r2!=null){
-            return r1.val==r2.val && isSameTree(r1.left,r2.left) && isSameTree(r1.right,r2.right);
+        else if(r1==null || r2==null)
+        {
+            return false;
         }
         else{
-            return false;
+            return r1.val==r2.val && isSameTree(r1.left,r2.left) && isSameTree(r1.right,r2.right);
         }
     }
 }
