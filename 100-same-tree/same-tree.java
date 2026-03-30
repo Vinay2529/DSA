@@ -19,12 +19,10 @@ class Solution {
         {
             return true;
         }
-        else if(p==null || q==null)
+        if(p==null || q==null)
         {
             return false;
         }
-        else{
-            return p.val==q.val && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
-        }
+        return p.val==q.val && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
 }
