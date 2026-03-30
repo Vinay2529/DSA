@@ -25,8 +25,8 @@ class Solution {
     }
     private boolean isSym(TreeNode r1,TreeNode r2)
     {
-        if(r1==null && r2==null)return true;
-        else if(r1==null || r2==null) return false;
-        return r1.val==r2.val && isSym(r1.left , r2.right) && isSym(r1.right,r2.left);
+        if(r1==null && r2==null) return true;
+        if(r1==null || r2==null) return false;
+        return r1.val==r2.val && isSym(r1.left,r2.right) && isSym(r1.right,r2.left);
     }
 }
