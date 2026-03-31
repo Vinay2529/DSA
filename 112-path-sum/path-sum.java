@@ -18,29 +18,17 @@ class Solution {
         return func(root, 0, targetSum);
     }
 
-    private boolean func(TreeNode root,int sumTillParent,int targetSum)
-    {
-       if(root==null) return false;
-       
-       else if(root.left==null && root.right==null)
-       {
-        int currentSum=sumTillParent+root.val;
-        if(currentSum==targetSum) return true;
-        else return false;
-       }
+    private boolean func(TreeNode root, int sum, int target) {
+        if (root == null)
+            return false;
 
-       else{
-        boolean result=false;
-        int currSum=sumTillParent+root.val;
-        if(root.left!=null)
-        {
-            result=result||func(root.left,currSum,targetSum);
+        sum += root.val;
+
+        if (root.left == null && root.right == null) {
+            return sum == target;
         }
-        if(root.right!=null)
-        {
-            result=result||func(root.right,currSum,targetSum);
-        }
-        return result;
-       }
+
+        return func(root.left, sum, target) ||
+                func(root.right, sum, target);
     }
 }
