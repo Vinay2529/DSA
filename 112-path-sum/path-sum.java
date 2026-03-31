@@ -20,25 +20,27 @@ class Solution {
 
     private boolean func(TreeNode root,int sumTillParent,int targetSum)
     {
-        if(root==null) return false;
-        else if(root.left==null && root.right==null)
+       if(root==null) return false;
+       
+       else if(root.left==null && root.right==null)
+       {
+        int currentSum=sumTillParent+root.val;
+        if(currentSum==targetSum) return true;
+        else return false;
+       }
+
+       else{
+        boolean result=false;
+        int currSum=sumTillParent+root.val;
+        if(root.left!=null)
         {
-            int currSum=sumTillParent+root.val;
-            if(currSum==targetSum) return true;
-            else return false;
+            result=result||func(root.left,currSum,targetSum);
         }
-        else{
-            int currSum=root.val+sumTillParent;
-            boolean result=false;
-            if(root.left!=null)
-            {
-                result=result||func(root.left,currSum,targetSum);
-            }
-            if(root.right!=null)
-            {
-                result=result||func(root.right,currSum,targetSum);
-            }
-            return result;
+        if(root.right!=null)
+        {
+            result=result||func(root.right,currSum,targetSum);
         }
+        return result;
+       }
     }
 }
