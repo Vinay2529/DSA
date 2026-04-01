@@ -14,23 +14,22 @@
  * }
  */
 class Solution {
-    List<List<Integer>> answer;
+    public List<List<Integer>> answer;
     public List<List<Integer>> pathSum(TreeNode root, int targetSum){
         answer=new ArrayList<>();
-        func(root,targetSum,new ArrayList<>());
+        function(root,targetSum,new ArrayList<>());
         return answer;
     }
-    private void func(TreeNode root,int targetSum,List<Integer> path)
+    private void function(TreeNode root,int target,List<Integer> path)
     {
-        if(root==null) return ;
+        if(root==null) return;
         path.add(root.val);
-        if(root.left==null && root.right==null && root.val==targetSum)
+        if(root.left==null && root.right==null && root.val==target)
         {
             answer.add(new ArrayList<>(path));
         }
-
-        func(root.left,targetSum-root.val,path);
-        func(root.right,targetSum-root.val,path);
+        function(root.left,target-root.val,path);
+        function(root.right,target-root.val,path);
 
         path.remove(path.size()-1);
     }
