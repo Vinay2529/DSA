@@ -17,7 +17,7 @@ class Solution {
     public List<List<Integer>> answer;
     public List<List<Integer>> levelOrder(TreeNode root) {
         answer=new ArrayList<>();
-        int h=depth(root);
+        int h=height(root);
         for(int i=0;i<h;i++)
         {
             answer.add(new ArrayList<>());
@@ -25,17 +25,18 @@ class Solution {
         traverse(root,0);
         return answer;
     }
-    private int depth(TreeNode root)
+    private int height(TreeNode root)
     {
         if(root==null) return 0;
-        int leftHeight=depth(root.left);
-        int rightHeight=depth(root.right);
+
+        int leftHeight=height(root.left);
+        int rightHeight=height(root.right);
 
         return Math.max(leftHeight,rightHeight)+1;
     }
     private void traverse(TreeNode root,int level)
     {
-        if(root==null) return;
+        if(root==null) return ;
         answer.get(level).add(root.val);
         traverse(root.left,level+1);
         traverse(root.right,level+1);
