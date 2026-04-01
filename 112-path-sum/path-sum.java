@@ -19,16 +19,13 @@ class Solution {
     }
 
     private boolean func(TreeNode root, int sum, int target) {
-        if (root == null)
-            return false;
-
-        sum += root.val;
-
-        if (root.left == null && root.right == null) {
-            return sum == target;
+        if(root==null) return false;
+        sum+=root.val;
+        if(root.left==null && root.right==null)
+        {
+            return sum==target;
         }
 
-        return func(root.left, sum, target) ||
-                func(root.right, sum, target);
+        return func(root.left,sum,target)||func(root.right,sum,target);
     }
 }
