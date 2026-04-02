@@ -14,27 +14,26 @@
  * }
  */
 class Solution {
-    public TreeNode parentX=null, parentY=null;
+    public TreeNode parentX=null,parentY=null;
     public int depthX=-1,depthY=-1;
     public boolean isCousins(TreeNode root, int x, int y) {
         Cousins(root,null,0,x,y);
-        return (depthX==depthY) && (parentX !=parentY);
+        return (depthX==depthY) && (parentX!=parentY);
     }
     private void Cousins(TreeNode node,TreeNode parent,int depth,int x,int y)
     {
-        if(node==null) return ;
-        
+        if(node==null) return;
+
         if(node.val==x)
         {
-            parentX=parent;
             depthX=depth;
+            parentX=parent;
         }
         if(node.val==y)
         {
-            parentY=parent;
             depthY=depth;
+            parentY=parent;
         }
-
         Cousins(node.left,node,depth+1,x,y);
         Cousins(node.right,node,depth+1,x,y);
     }
