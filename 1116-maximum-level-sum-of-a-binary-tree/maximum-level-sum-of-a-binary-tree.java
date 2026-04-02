@@ -17,11 +17,6 @@ class Solution {
     public List<Integer> answer;
     public int maxLevelSum(TreeNode root) {
         answer=new ArrayList<>();
-        int h=height(root);
-        for(int i=0;i<h;i++)
-        {
-            answer.add(0);
-        }
         traverse(root,0);
         int maxSum=Integer.MIN_VALUE;
         int level=0;
@@ -35,21 +30,14 @@ class Solution {
         }
         return level;
     }
-    private int height(TreeNode root)
-    {
-        if(root==null) return 0;
-
-        int left=height(root.left);
-        int right=height(root.right);
-
-        return Math.max(left,right)+1;
-    }
     private void traverse(TreeNode root,int level)
     {
-        if(root==null) return;
-        
-        answer.set(level, answer.get(level) + root.val);
-
+        if(root==null)return;
+        if(level==answer.size()){
+            answer.add(root.val);
+        }else{
+            answer.set(level, answer.get(level) + root.val);
+        }
         traverse(root.left,level+1);
         traverse(root.right,level+1);
     }
