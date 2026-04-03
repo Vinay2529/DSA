@@ -30,6 +30,7 @@ class Solution {
         }
         return level;
     }
+    
     private void traverse(TreeNode root,int level)
     {
         if(root==null)return;
