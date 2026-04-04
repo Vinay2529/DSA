@@ -14,32 +14,40 @@
  * }
  */
 class Solution {
-    public List<Integer> answer;
+    class pair{
+        public int level;
+        public TreeNode node;
+        public pair(int level,TreeNode node){
+            this.level=level;
+            this.node=node;
+        }
+    }
     public int maxLevelSum(TreeNode root) {
-        answer=new ArrayList<>();
-        traverse(root,0);
-        int maxSum=Integer.MIN_VALUE;
-        int level=0;
-        for(int i=0;i<answer.size();i++)
-        {
-            if(answer.get(i)>maxSum)
+        Map<Integer,Integer> mp=new HashMap<>();
+        Queue<pair> queue=new LinkedList<>();
+
+        queue.add(new pair(1,root));
+        while(!queue.isEmpty()){
+            pair top=queue.poll();
+            if(!mp.containsKey(top.level)){
+                mp.put(top.level,0);
+            }
+            mp.put(top.level,mp.get(top.level)+top.node.val);
+            if(top.node.left!=null)
             {
-                maxSum=answer.get(i);
-                level=i+1;
+                queue.add(new pair(top.level+1,top.node.left));
+            }
+            if(top.node.right!=null)
+            {
+                queue.add(new pair(top.level+1,top.node.right));
             }
         }
-        return level;
-    }
-    
-    private void traverse(TreeNode root,int level)
-    {
-        if(root==null)return;
-        if(level==answer.size()){
-            answer.add(root.val);
-        }else{
-            answer.set(level, answer.get(level) + root.val);
+        int ans=1;
+        for(Integer level:mp.keySet()){
+            if(mp.get(level)>mp.get(ans)){
+                ans=level;
+            }
         }
-        traverse(root.left,level+1);
-        traverse(root.right,level+1);
+        return ans;
     }
 }
