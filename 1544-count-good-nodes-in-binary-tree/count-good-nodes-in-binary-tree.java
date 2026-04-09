@@ -14,26 +14,19 @@
  * }
  */
 class Solution {
-    int count = 0;
     public int goodNodes(TreeNode root) {
-        f(root, null);
-        return count;
+        return f(root,root.val);
     }
-    
-    public void f(TreeNode node, Integer maxTillParent) {
-        if (node != null) {
-            int maxTillMe = node.val;
-            if (maxTillParent == null) {
-                count++;
-            }
-            else {
-                if (node.val >= maxTillParent) {
-                    count++;
-                }
-                maxTillMe = Math.max(maxTillMe, maxTillParent);
-            }
-            f(node.left, maxTillMe);
-            f(node.right, maxTillMe);
+    private int f(TreeNode root,int maxSoFar){
+        if(root==null) return 0;
+        int count=0;
+
+        if(root.val>=maxSoFar){
+            maxSoFar=root.val;
+            count++;
         }
+        count+=f(root.left,maxSoFar);
+        count+=f(root.right,maxSoFar);
+        return count;
     }
 }
