@@ -14,20 +14,18 @@
  * }
  */
 class Solution {
-    
+    public int sum = 0;
     public int sumOfLeftLeaves(TreeNode root) {
-        return sum(root);
+        visit(root, false);
+        return sum;
     }
-    private int sum(TreeNode root){
-        if(root==null){
-            return 0;
+    private void visit(TreeNode root, boolean isleftChild) {
+        if (root != null) {
+            if (root.left == null && root.right == null && isleftChild) {
+                sum += root.val;
+            }
+            visit(root.left, true);
+            visit(root.right, false);
         }
-        int ans=0;
-        if (root.left != null && root.left.left == null && root.left.right == null) {
-            ans += root.left.val;
-        }
-        ans += sum(root.left);
-        ans += sum(root.right);
-        return ans;
     }
 }
