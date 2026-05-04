@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<stones.length;i++){
             maxHeap.offer(stones[i]);
         }
-        
+
         while(maxHeap.size()>1){
             int a=maxHeap.poll();
             int b=maxHeap.poll();
@@ -12,10 +12,6 @@ class Solution {
                 maxHeap.offer(a-b);
             }
         }
-        
-        if(maxHeap.size()==0){
-            return 0;
-        }
-        return maxHeap.peek();
+        return maxHeap.isEmpty()?0:maxHeap.peek();
     }
 }
