@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(
+        PriorityQueue<ListNode> minHeap=new PriorityQueue<>(
             (a,b)->a.val-b.val
         );
         for(ListNode node:lists){
@@ -19,11 +19,11 @@ class Solution {
             }
         }
         ListNode test=new ListNode(-1);
-        ListNode current=test;
+        ListNode curr=test;
         while(!minHeap.isEmpty()){
             ListNode minNode=minHeap.poll();
-            current.next=minNode;
-            current=current.next;
+            curr.next=new ListNode(minNode.val);
+            curr=curr.next;
             if(minNode.next!=null){
                 minHeap.offer(minNode.next);
             }
