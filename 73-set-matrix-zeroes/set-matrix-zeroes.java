@@ -3,24 +3,21 @@ class Solution {
         int m = matrix.length;
         int n = matrix[0].length;
 
-        int[][] matrix2 = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                matrix2[i][j] = matrix[i][j];
+        boolean[] rows=new boolean[m];
+        boolean[] cols=new boolean[n];
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]==0){
+                    rows[i]=true;
+                    cols[j]=true;
+                }
             }
         }
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if(matrix2[i][j]==0)
-                {
-                    for (int col = 0; col < n; col++) {
-                        matrix[i][col] = 0;
-                    }
-
-                    for (int row = 0; row < m; row++) {
-                        matrix[row][j] = 0;
-                    }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(rows[i]|| cols[j]){
+                    matrix[i][j]=0;
                 }
             }
         }
