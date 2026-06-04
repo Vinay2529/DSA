@@ -28,6 +28,7 @@ class Solution {
             state.put(node,"V");
             List<Integer> neighbour=adj.get(node);
             for(int nei:neighbour){
+                if(isCycleFound) return;
                 dfs(nei);
             }
             state.put(node,"P");
