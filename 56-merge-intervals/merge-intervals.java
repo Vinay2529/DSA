@@ -13,9 +13,7 @@ class Solution {
         });
         List<int[]> answer=new ArrayList<>();
         answer.add(intervals[0]);
-
-        for(int i=1;i<intervals.length;i++)
-        {
+        for(int i=1;i<intervals.length;i++){
             int[] currentInterval=intervals[i];
             int[] lastInterval=answer.get(answer.size()-1);
             if(currentInterval[0]<=lastInterval[1]){
@@ -23,7 +21,7 @@ class Solution {
                 Math.max(currentInterval[1],lastInterval[1])};
                 answer.remove(answer.size()-1);
                 answer.add(newInterval);
-            } 
+            }
             else{
                 answer.add(currentInterval);
             }
