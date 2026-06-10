@@ -9,15 +9,23 @@
  * }
  */
 class Solution {
+    private ListNode newNode;
     public ListNode reverseList(ListNode head) {
-        ListNode prev=null;
-        ListNode curr=head;
-        while(curr!=null){
-            ListNode nextNode=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=nextNode;
+        if(head!=null){
+            ListNode lastNode=recursive(head);
+            lastNode.next=null;
+            head=newNode;
         }
-        return prev;
+        return head;
+    }
+    private ListNode recursive(ListNode curr){
+        if(curr.next==null){
+            newNode=curr;
+            return curr;
+        }else{
+            ListNode last=recursive(curr.next);
+            last.next=curr;
+            return curr;
+        }
     }
 }
