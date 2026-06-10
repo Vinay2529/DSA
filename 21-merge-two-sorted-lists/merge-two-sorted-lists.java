@@ -10,47 +10,37 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode headA=list1,headB=list2;
-        ListNode head=null,tail=null;
-        while(headA!=null || headB!=null)
-        {
-            ListNode nottocopy=null;
-            if(headA!=null && headB!=null)
-            {
-                if(headA.val<headB.val)
-                {
-                    nottocopy=headA;
-                    headA=headA.next;
+        ListNode headA = list1, headB = list2;
+        ListNode head = null, tail = null;
+        while (headA != null || headB != null) {
+            ListNode headC = null;
+            if (headA != null && headB != null) {
+                if (headA.val <= headB.val) {
+                    headC = headA;
+                    headA = headA.next;
+                } else {
+                    headC = headB;
+                    headB = headB.next;
                 }
-                else{
-                    nottocopy=headB;
-                    headB=headB.next;
-                }
+            } else if (headA != null) {
+                headC = headA;
+                headA = headA.next;
+            } else if (headB != null) {
+                headC = headB;
+                headB = headB.next;
             }
-            else if(headA!=null)
-            {
-                nottocopy=headA;
-                headA=headA.next;
-            }
-            else if(headB!=null){
-                nottocopy=headB;
-                headB=headB.next;
-            }
-            tail=insert(tail,nottocopy.val);
-            if(head==null)
-            {
-                head=tail;
+            tail = insert(tail, headC.val);
+            if (head == null) {
+                head = tail;
             }
         }
         return head;
     }
-    private ListNode insert(ListNode tail,int data)
-    {
-        ListNode nn=new ListNode(data,null);
-        if(tail!=null)
-        {
-            tail.next=nn;
+    private ListNode insert(ListNode tail, int data) {
+        ListNode newNode = new ListNode(data, null);
+        if (tail != null) {
+            tail.next = newNode;
         }
-        return nn;
+        return newNode;
     }
 }
