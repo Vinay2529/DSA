@@ -1,42 +1,38 @@
 class Solution {
-    private List<List<Integer>> adj=new ArrayList<>();
-    private Map<Integer,String> state=new HashMap<>();
-    private boolean cycleFound=false;
+    public List<List<Integer>> graph = new ArrayList<>();
+    public boolean isCycleFound = false;
+    public Map<Integer,Character> state=new HashMap<>();
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         for(int i=0;i<numCourses;i++){
-            adj.add(new ArrayList<>());
-            state.put(i,"U");
+            graph.add(new ArrayList<>());
+            state.put(i,'U');
         }
-
-        for(int i=0;i<prerequisites.length;i++){
-            int[] req=prerequisites[i];
-            int fromNode=req[1];
-            int toNode=req[0];
-    
-            adj.get(fromNode).add(toNode);
+        for(int[] arr:prerequisites){
+            int fromNode=arr[1];
+            int toNode=arr[0];
+            graph.get(fromNode).add(toNode);
         }
         for(int i=0;i<numCourses;i++){
-            if(state.get(i).equals("U")){
+            if(state.get(i).equals('U')){
                 dfs(i);
             }
-            if(cycleFound==true){
+            if(isCycleFound==true){
                 return false;
             }
         }
-
-        return !cycleFound;
+        return !isCycleFound;
     }
-    private void dfs(int node){
-        if(state.get(node).equals("U")){
-            state.put(node,"V");
-            List<Integer> neighbour=adj.get(node);
-            for(int nei : neighbour){
-                dfs(nei);
+    private void dfs(int i){
+        if(state.get(i).equals('U')){
+            state.put(i,'V');
+            List<Integer> neighbour =graph.get(i);
+            for(int num : neighbour){
+                dfs(num);
             }
-            state.put(node,"P");
+            state.put(i,'P');
         }
-        else if(state.get(node).equals("V")){
-            cycleFound=true;
+        else if(state.get(i).equals('V')){
+            isCycleFound=true;
         }
     }
 }
