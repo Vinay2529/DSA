@@ -4,10 +4,9 @@ class Solution {
         boolean[] dp=new boolean[n];
         dp[n-1]=true;
         for(int i=n-2;i>=0;i--){
-            for(int j=i+1;j<=Math.min(i+nums[i],n-1);j++){
+            for(int j=i+1;j<=Math.min(n-1,i+nums[i]);j++){
                 if(dp[j]==true){
                     dp[i]=true;
-                    break;
                 }
             }
         }
