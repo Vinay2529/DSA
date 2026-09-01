@@ -7,6 +7,7 @@ class Solution {
             for(int j=i+1;j<=Math.min(n-1,i+nums[i]);j++){
                 if(dp[j]==true){
                     dp[i]=true;
+                    break;
                 }
             }
         }
