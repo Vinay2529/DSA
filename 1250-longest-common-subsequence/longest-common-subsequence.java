@@ -16,7 +16,10 @@ class Solution {
         if(i==-1 || j==-1){
             return 0;
         }
-        if(dp[i][j]==-1){
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        else{
             if(text1.charAt(i)==text2.charAt(j)){
                 dp[i][j]=lcs(text1,text2,i-1,j-1)+1;
             }
