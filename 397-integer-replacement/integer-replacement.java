@@ -3,6 +3,7 @@ class Solution {
 
     public int integerReplacement(int n) {
         mp = new HashMap<>();
+        mp.put((long)1,0);
         return f((long) n);
     }
 
@@ -10,10 +11,7 @@ class Solution {
         if (mp.containsKey(n)) {
             return mp.get(n);
         }
-        if (n == 1) {
-            return 0;
-        }
-        int ans;
+        int ans=0;
         if (n % 2 == 0) {
             ans = f(n / 2) + 1;
         } else {
