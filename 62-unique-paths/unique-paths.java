@@ -1,16 +1,14 @@
 class Solution {
     public int uniquePaths(int m, int n) {
-        int[][] dp=new int[m][n];
-        for(int[] row:dp) Arrays.fill(row,-1);
-        return recur(m-1,n-1,dp);
-    }
-    private int recur(int i,int j,int[][] dp){
-        if(i==0 && j==0) return 1;
-        if(i<0 || j<0) return 0;
+        int totalMoves = m + n - 2;
+        int moves = Math.min(m - 1, n - 1);
 
-        if(dp[i][j]!= -1) return dp[i][j];
+        long result = 1;
 
-        dp[i][j]=recur(i-1,j,dp)+recur(i,j-1,dp);
-        return dp[i][j];
+        for (int i = 1; i <= moves; i++) {
+            result = result * (totalMoves - moves + i) / i;
+        }
+
+        return (int) result;
     }
 }
